@@ -38,7 +38,7 @@ public class MusicMapperTest {
 
     @Test
     @Order(1)
-    @DisplayName("🎵 새 음악 생성")
+    @DisplayName("새 음악 생성")
     public void testCreate() {
         mapper.create(testMusic);
         assertTrue(testMusic.getId() > 0);
@@ -47,7 +47,7 @@ public class MusicMapperTest {
 
     @Test
     @Order(2)
-    @DisplayName("🎧 전체 목록 가져오기")
+    @DisplayName("전체 목록 가져오기")
     public void testGetList() {
         var list = mapper.getList();
         assertNotNull(list);
@@ -57,7 +57,7 @@ public class MusicMapperTest {
 
     @Test
     @Order(3)
-    @DisplayName("🔍 ID로 음악 조회")
+    @DisplayName("ID로 음악 조회")
     public void testGetById() {
         MusicVO music = mapper.get(testMusic.getId());
         assertNotNull(music);
@@ -67,7 +67,7 @@ public class MusicMapperTest {
 
     @Test
     @Order(4)
-    @DisplayName("✏️ 음악 정보 수정")
+    @DisplayName("음악 정보 수정")
     public void testUpdate() {
         testMusic.setTitle("수정된 제목");
         testMusic.setArtist("수정된 가수");
@@ -81,7 +81,7 @@ public class MusicMapperTest {
 
     @Test
     @Order(5)
-    @DisplayName("❌ 음악 삭제")
+    @DisplayName("음악 삭제")
     public void testDelete() {
         int deleted = mapper.delete(testMusic.getId());
         assertEquals(1, deleted);
