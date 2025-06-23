@@ -2,6 +2,33 @@
 <!DOCTYPE mapper
         PUBLIC "--//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="">
+<mapper namespace="org.scoula.mapper.MusicMapper">
+    <select id="getList" resultType="org.scoula.domain.MusicVO">
+        SELECT * FROM music_board_db
+    </select>
 
+    <select id="get" resultType="org.scoula.domain.MusicVO">
+        select * from music_board_db where id = #{id}
+    </select>
+
+    <insert id="create">
+        insert into music_board_db(title, artist, genre)
+        values (#{title}, #{artist}, #{genre})
+        <selectKey resultType="int" keyProperty="id" keyColumn="id" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <update id="update">
+        update music_board_db set
+                title = #{title},
+                artist = #{artist},
+                genre = #{genre},
+                update_date = now()
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from music_board_db where id = #{id}
+    </delete>
 </mapper>
