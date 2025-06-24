@@ -23,4 +23,5 @@ public interface ReviewMapper {
 
     // 특정 음악의 리뷰 목록 조회
     List<ReviewVO> getListByMusicId(Long musicId);
+
 }
