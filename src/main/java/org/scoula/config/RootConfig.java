@@ -19,7 +19,7 @@ import javax.sql.DataSource;
 @Configuration
 @PropertySource({"classpath:/application.properties"})
 @MapperScan(basePackages = {"org.scoula.mapper"})
-@ComponentScan(basePackages={ "org.scoula.service" })
+@ComponentScan(basePackages = {"org.scoula.service"})
 public class RootConfig {
     @Value("${jdbc.driver}") String driver;
     @Value("${jdbc.url}") String url;
