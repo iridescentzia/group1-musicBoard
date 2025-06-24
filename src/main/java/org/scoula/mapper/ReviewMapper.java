@@ -13,7 +13,7 @@ public interface ReviewMapper {
     ReviewVO get(Long id);
 
     // 리뷰 작성
-    void insert(ReviewVO review);
+    void create(ReviewVO review);
 
     // 리뷰 수정
     int update(ReviewVO review);
