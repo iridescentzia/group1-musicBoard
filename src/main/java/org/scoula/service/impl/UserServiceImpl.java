@@ -1,6 +1,7 @@
 package org.scoula.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.scoula.dto.ReviewDTO;
 import org.scoula.dto.UserDTO;
 import org.scoula.mapper.UserMapper;
 import org.scoula.service.UserService;
