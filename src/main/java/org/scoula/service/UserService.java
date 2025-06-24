@@ -1,5 +1,6 @@
 package org.scoula.service;
 
+import org.scoula.dto.ReviewDTO;
 import org.scoula.dto.UserDTO;
 
 import java.util.List;
