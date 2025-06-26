@@ -2,6 +2,7 @@ package org.scoula.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.scoula.domain.UserVO;
+import org.scoula.dto.ReviewDTO;
 
 import java.util.List;
 
