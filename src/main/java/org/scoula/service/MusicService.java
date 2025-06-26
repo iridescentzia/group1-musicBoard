@@ -6,9 +6,9 @@ import org.scoula.dto.MusicDTO;
 import java.util.List;
 
 public interface MusicService {
-    public List<MusicVO> getList();
-    public MusicVO get(int id);
-    public void create(MusicVO music);
-    public boolean update(MusicVO music);
-    public boolean delete(int id);
+    public List<MusicDTO> getList();
+    public MusicDTO get(Long id);
+    public void create(MusicDTO music);
+    public boolean update(MusicDTO music);
+    public boolean delete(Long id);
 }

@@ -5,52 +5,54 @@ import lombok.extern.log4j.Log4j2;
 import org.scoula.domain.MusicVO;
 import org.scoula.dto.MusicDTO;
 import org.scoula.service.MusicService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Log4j2
-@Controller
-@RequestMapping("/api/music")
+@RestController
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class MusicController {
     final MusicService service;
 
-    @GetMapping("/list")  // GET /api/music/list
-    public void list(Model model) {
-        log.info("list");
-        model.addAttribute("list", service.getList());
+    // 음악 목록 조회
+    @GetMapping("/music")
+    public ResponseEntity<List<MusicDTO>> getList() {
+        log.info("GET /api/music");
+        return ResponseEntity.ok(service.getList());
     }
 
-    @GetMapping("/create")  // GET /api/music/create
-    public void create() {
-        log.info("CREATE");
+    // 특정 음악 상세 (리뷰 포함)
+    @GetMapping("/music/{id}")
+    public ResponseEntity<MusicDTO> get(@PathVariable Long id) {
+        log.info("GET /api/music/{}", id);
+        return ResponseEntity.ok(service.get(id));
     }
 
-    @GetMapping({"/get", "/update"})  // GET /api/music/get?id={id} 또는 /api/music/update?id={id}
-    public void get(@RequestParam("id") int id, Model model) {
-        log.info("GET or UPDATE");
-        model.addAttribute("music", service.get(id));
-    }
-
-    @PostMapping("/create")  // POST /api/music/create
-    public String create(MusicVO music) {
-        log.info("CREATE : " + music);
+    // 음악 등록
+    @PostMapping("/music")
+    public ResponseEntity<Void> create(@RequestBody MusicDTO music) {
+        log.info("POST /api/music -> {}", music);
         service.create(music);
-        return "redirect:/api/music/list";
+        return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/update")  // POST /api/music/update
-    public String update(MusicVO music) {
-        log.info("UPDATE : " + music);
-        service.update(music);
-        return "redirect:/api/music/list";
+    // 음악 수정
+    @PutMapping("/music/{id}")
+    public ResponseEntity<Void> update(@PathVariable Long id, @RequestBody MusicDTO music) {
+        music.setId(id);
+        log.info("PUT /api/music/{} -> {}", id, music);
+        return service.update(music) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/delete")  // POST /api/music/delete?id={id}
-    public String delete(@RequestParam("id") int id) {
-        log.info("DELETE : " + id);
-        service.delete(id);
-        return "redirect:/api/music/list";
+    // 음악 삭제
+    @DeleteMapping("/music/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        log.info("DELETE /api/music/{}", id);
+        return service.delete(id) ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
     }
 }
