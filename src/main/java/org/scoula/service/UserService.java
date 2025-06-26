@@ -1,5 +1,6 @@
 package org.scoula.service;
 
+import org.scoula.dto.ReviewDTO;
 import org.scoula.dto.UserDTO;
 
 import java.util.List;
@@ -11,5 +12,4 @@ public interface UserService {
     public void updateUser(UserDTO user);
     public void deleteUserById(int id);
     public List<ReviewDTO> getReviewsByUserId(int userId);
-
 }
