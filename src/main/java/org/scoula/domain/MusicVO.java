@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MusicVO {
-    private int id;
+    private Long id;
     private String title;
     private String artist;
     private String genre;
