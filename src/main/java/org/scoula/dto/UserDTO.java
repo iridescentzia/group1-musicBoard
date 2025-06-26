@@ -11,20 +11,20 @@ import org.scoula.domain.UserVO;
 @AllArgsConstructor
 @Builder
 public class UserDTO {
-    private int id;
-    private String username;
+    private int userId;
+    private String userName;
 
     public static UserDTO of(UserVO vo){
         return vo == null ? null : UserDTO.builder()
-                .id(vo.getId())
-                .username(vo.getUsername())
+                .userId(vo.getUserId())
+                .userName(vo.getUserName())
                 .build();
     }
 
     public UserVO toVO(){
         return UserVO.builder()
-                .id(id)
-                .username(username)
+                .userId(userId)
+                .userName(userName)
                 .build();
 
     }

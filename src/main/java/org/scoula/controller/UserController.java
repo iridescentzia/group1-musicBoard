@@ -48,7 +48,7 @@ public class UserController {
     // 사용자 정보 수정
     @PutMapping("/{id}")
     public ResponseEntity<String> updateUser(@PathVariable int id, @RequestBody UserDTO dto) {
-        dto.setId(id);
+        dto.setUserId(id);
         userService.updateUser(dto);
         return ResponseEntity.ok("User updated");
     }

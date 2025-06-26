@@ -12,5 +12,4 @@ public interface UserService {
     public void updateUser(UserDTO user);
     public void deleteUserById(int id);
     public List<ReviewDTO> getReviewsByUserId(int userId);
-
 }
