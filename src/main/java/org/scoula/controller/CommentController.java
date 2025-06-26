@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -53,7 +53,7 @@ public class CommentController {
     public ResponseEntity<Void> registerComments(@PathVariable Long reviewId, @RequestBody CommentDTO commentDTO) {
         log.info("comment registered");
         commentDTO.setReviewId(reviewId);
-        commentDTO.setCreatedAt(LocalDateTime.now());
+        commentDTO.setCreatedAt(new Date());
         commentService.registerComment(commentDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

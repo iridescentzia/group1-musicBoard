@@ -18,7 +18,7 @@ public class MusicDTO {
     private String title;
     private String artist;
     private String genre;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
     private Date releaseDate;
     private String coverUrl;
 
