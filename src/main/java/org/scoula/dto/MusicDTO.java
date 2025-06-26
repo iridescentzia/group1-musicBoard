@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class MusicDTO {
-    private int id;
+    private Long id;
     private String title;
     private String artist;
     private String genre;
