@@ -2,6 +2,7 @@ package org.scoula.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.scoula.domain.ReviewVO;
 import org.scoula.dto.ReviewDTO;
 import org.scoula.mapper.ReviewMapper;
 import org.scoula.service.ReviewService;

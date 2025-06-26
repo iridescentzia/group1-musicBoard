@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class UserVO {
-    private int id; //사용자 고유 id
-    private String username; //사용자 이름
+    private int userId; //사용자 고유 id
+    private String userName; //사용자 이름
 }
