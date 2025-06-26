@@ -18,4 +18,6 @@ public class ReviewVO {
     private String content; // 리뷰 내용
     private int rating; // 평점
     private Date createdAt; // 작성 일시
+
+    private MusicVO music;
 }
