@@ -1,11 +1,13 @@
 package org.scoula.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.scoula.domain.ReviewVO;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -18,6 +20,7 @@ public class ReviewDTO {
     private Long musicId;
     private String content;
     private int rating;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Date createdAt;
 
     // VO -> DTO 변환
