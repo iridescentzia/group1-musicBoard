@@ -34,10 +34,12 @@
     <!-- 해당 사용자의 리뷰 목록 조회 -->
     <select id="getReviewsByUserId" resultType="org.scoula.dto.ReviewDTO">
         select
-            r.id as id,
-            r.content as content,
-            r.rating as rating,
-            r.created_at as createAt,
+            r.id,
+            r.user_id,
+            r.music_id,
+            r.content,
+            r.rating,
+            r.created_at,
             m.title as musicTitle
         from reviews r
         join music m on r.music_id = m.id
