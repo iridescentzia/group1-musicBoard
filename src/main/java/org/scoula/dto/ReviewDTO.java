@@ -42,6 +42,7 @@ public class ReviewDTO {
     // DTO -> VO 변환
     public ReviewVO toVO() {
         return ReviewVO.builder()
+                .id(id)
                 .userId(userId)
                 .musicId(musicId)
                 .content(content)
