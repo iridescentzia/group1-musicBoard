@@ -21,8 +21,8 @@ public class ReviewPageController {
     @GetMapping("/reviews")
     public String showReviewList(Model model) {
         log.info("Getting /reviews (JSP)✅");
-        model.addAttribute("reviews, reviewService.getList()");
-        return "review/reviewMyList"; // WEB-INF/views/review/reviewList.jsp
+        model.addAttribute("reviews", reviewService.getList());
+        return "review/reviewList"; // WEB-INF/views/review/reviewList.jsp
     }
 
     // 리뷰 상세 페이지 추가

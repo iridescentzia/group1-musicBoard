@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.scoula.domain.MusicVO;
 import org.scoula.domain.ReviewVO;
 
 import java.time.LocalDateTime;
@@ -23,6 +24,8 @@ public class ReviewDTO {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private Date createdAt;
 
+    private MusicDTO music;
+
     // VO -> DTO 변환
     public static ReviewDTO of(ReviewVO vo) {
         return vo == null ? null : ReviewDTO.builder()
@@ -32,6 +35,7 @@ public class ReviewDTO {
                 .content(vo.getContent())
                 .rating(vo.getRating())
                 .createdAt(vo.getCreatedAt())
+                .music(MusicDTO.of(vo.getMusic())) // MusicVo -> MusicDTO 변환
                 .build();
     }
 
@@ -44,6 +48,7 @@ public class ReviewDTO {
                 .content(content)
                 .rating(rating)
                 .createdAt(createdAt)
+                .music(music != null ? music.toVO() : null) // MusicDTO -> MusicVO 변
                 .build();
     }
 }
