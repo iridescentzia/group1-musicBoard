@@ -5,18 +5,18 @@
 <mapper namespace="org.scoula.mapper.UserMapper">
     <!-- 모든 사용자 조회 -->
     <select id="getAllUsers" resultType="org.scoula.domain.UserVO">
-        select * from users
+        select id AS user_id, username AS user_name from users
     </select>
 
     <!-- 사용자 등록 -->
     <insert id="insertUser">
         insert into users (username)
-        values(#{username})
+        values(#{userName})
     </insert>
 
     <!-- id로 사용자 조회 -->
     <select id="getUserById" resultType="org.scoula.domain.UserVO">
-        select * from users where id = #{id}
+        select id AS user_id, username AS user_name from users where id = #{id}
     </select>
 
     <!-- id로 사용자 삭제 -->
@@ -27,8 +27,8 @@
     <!-- 사용자 정보 수정 -->
     <update id="updateUser">
         update users
-        set username = #{username}
-        where id = #{id}
+        set username = #{userName}
+        where id = #{userId}
     </update>
 
     <!-- 해당 사용자의 리뷰 목록 조회 -->
