@@ -60,5 +60,4 @@ public class ReviewController {
         log.info("GET /api/music/{}/reviews", musicId);
         return ResponseEntity.ok(service.getListByMusicId(musicId));
     }
-
 }
