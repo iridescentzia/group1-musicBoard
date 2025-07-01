@@ -9,7 +9,7 @@
 <h2>📄 User API Test Page</h2>
 
 
-<h3>모든 사용자 조회<h3>
+<h3>모든 사용자 조회</h3>
 <button onclick="getAllUsers()">모든 사용자 조회</button>
 <pre id="allUsersResult"></pre>
 
