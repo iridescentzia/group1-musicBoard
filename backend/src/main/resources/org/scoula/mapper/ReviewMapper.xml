@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.scoula.mapper.ReviewMapper">
+
+    <!-- 리뷰 등록 -->
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO reviews (user_id, music_id, content, rating)
+        VALUES (#{userId}, #{musicId}, #{content}, #{rating})
+    </insert>
+
+    <!-- 리뷰 수정 -->
+    <update id="update">
+        UPDATE reviews
+        SET content = #{content},
+            rating = #{rating}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 리뷰 삭제 -->
+    <delete id="delete">
+        DELETE FROM reviews
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 전체 리뷰 목록 -->
+    <select id="getList" resultMap="reviewMap">
+        SELECT r.*,
+               m.id AS m_id, m.title AS m_title, m.artist AS m_artist,
+               m.genre AS m_genre, m.release_date AS m_release_date,
+               m.cover_url AS m_cover_url
+        FROM reviews r
+                 LEFT JOIN music m ON r.music_id = m.id
+        ORDER BY r.created_at DESC
+    </select>
+
+    <!-- 특정 리뷰 조회 -->
+    <select id="get" resultMap="reviewMap">
+        SELECT r.*,
+               m.id AS m_id, m.title AS m_title, m.artist AS m_artist,
+               m.genre AS m_genre, m.release_date AS m_release_date,
+               m.cover_url AS m_cover_url
+        FROM reviews r
+                 LEFT JOIN music m ON r.music_id = m.id
+        WHERE r.id = #{id}
+    </select>
+
+    <!-- 특정 음악의 리뷰 목록 -->
+    <select id="getListByMusicId" resultMap="reviewMap">
+        SELECT r.*,
+               m.id AS m_id, m.title AS m_title, m.artist AS m_artist,
+               m.genre AS m_genre, m.release_date AS m_release_date,
+               m.cover_url AS m_cover_url
+        FROM reviews r
+                 LEFT JOIN music m ON r.music_id = m.id
+        WHERE r.music_id = #{musicId}
+        ORDER BY r.created_at DESC
+    </select>
+
+    <!-- 음악 정보 매핑 -->
+    <resultMap id="musicMap" type="org.scoula.domain.MusicVO">
+        <id column="m_id" property="id"/>
+        <result column="m_title" property="title"/>
+        <result column="m_artist" property="artist"/>
+        <result column="m_genre" property="genre"/>
+        <result column="m_release_date" property="releaseDate"/>
+        <result column="m_cover_url" property="coverUrl"/>
+    </resultMap>
+
+    <!-- 리뷰 정보 매핑 -->
+    <resultMap id="reviewMap" type="org.scoula.domain.ReviewVO">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="music_id" property="musicId"/>
+        <result column="content" property="content"/>
+        <result column="rating" property="rating"/>
+        <result column="created_at" property="createdAt"/>
+        <association property="music" resultMap="musicMap"/>
+    </resultMap>
+
+</mapper>
