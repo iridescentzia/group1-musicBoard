@@ -1,12 +1,12 @@
 <!-- 음악 후기 게시판용 간단 Header -->
 <script setup>
-import config from "@/config/index.js";
+// import config from "@/config/index.js";
 </script>
 
 <template>
   <div class="header-hero">
-    <h1>{{ config.title }}</h1>
-    <p>{{ config.subtitle }}</p>
+    <!-- <h1>{{ config.title }}</h1>
+    <p>{{ config.subtitle }}</p> -->
   </div>
 </template>
 
