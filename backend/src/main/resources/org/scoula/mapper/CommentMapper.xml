@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "--//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.scoula.mapper.CommentMapper">
+
+        <!-- 리뷰 ID 기준 댓글 + 리뷰 내용/별점 매핑 -->
+        <resultMap id="CommentWithReviewResultMap" type="org.scoula.domain.CommentVO">
+            <id property="id" column="id"/>
+            <result property="reviewId" column="review_id"/>
+            <result property="userId" column="user_id"/>
+            <result property="content" column="content"/>
+            <result property="createdAt" column="created_at"/>
+            <result property="reviewContent" column="reviewContent"/>
+            <result property="reviewRating" column="reviewRating"/>
+        </resultMap>
+
+        <!-- 사용자 ID 기준 댓글 + 사용자 이름 매핑 -->
+        <resultMap id="CommentWithUserResultMap" type="org.scoula.domain.CommentVO">
+            <id property="id" column="id"/>
+            <result property="reviewId" column="review_id"/>
+            <result property="userId" column="user_id"/>
+            <result property="content" column="content"/>
+            <result property="createdAt" column="created_at"/>
+            <result property="userName" column="username"/>
+        </resultMap>
+
+        <!-- 리뷰 ID 기준 댓글 + 리뷰 내용/별점 조회 -->
+        <select id="selectCommentsByReviewId" resultMap="CommentWithReviewResultMap" parameterType="long">
+            SELECT
+                c.id,
+                c.review_id,
+                c.user_id,
+                c.content,
+                c.created_at,
+                r.content AS reviewContent,
+                r.rating AS reviewRating
+            FROM comments c
+                     JOIN reviews r ON c.review_id = r.id
+            WHERE c.review_id = #{reviewId}
+            ORDER BY c.created_at
+        </select>
+
+        <!-- 사용자 ID 기준 댓글 + 사용자 이름 조회 -->
+        <select id="selectCommentsByUserId" resultMap="CommentWithUserResultMap" parameterType="long">
+            SELECT
+                c.id,
+                c.review_id,
+                c.user_id,
+                c.content,
+                c.created_at,
+                u.username
+            FROM comments c
+                     JOIN users u ON c.user_id = u.id
+            WHERE c.user_id = #{userId}
+            ORDER BY c.created_at
+        </select>
+
+        <!-- ID 기준 단일 댓글 조회 -->
+        <select id="selectById" resultMap="CommentWithUserResultMap" parameterType="long">
+            SELECT c.id, c.review_id, c.user_id, c.content, c.created_at, u.username
+            FROM comments c
+                     JOIN users u ON c.user_id = u.id
+            WHERE c.id = #{id}
+        </select>
+
+        <!-- 댓글 등록 -->
+        <insert id="insert" parameterType="org.scoula.dto.CommentDTO" useGeneratedKeys="true" keyProperty="id">
+            INSERT INTO comments (review_id, user_id, content, created_at)
+            VALUES (#{reviewId}, #{userId}, #{content}, #{createdAt})
+        </insert>
+
+        <!-- 댓글 수정 -->
+        <update id="update" parameterType="org.scoula.dto.CommentDTO">
+            UPDATE comments
+            SET content = #{content}
+            WHERE id = #{id}
+        </update>
+
+        <!-- 댓글 삭제 -->
+        <delete id="delete" parameterType="long">
+            DELETE FROM comments WHERE id = #{id}
+        </delete>
+
+    </mapper>

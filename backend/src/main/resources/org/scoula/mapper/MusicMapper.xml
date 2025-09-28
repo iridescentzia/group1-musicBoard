@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "--//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.scoula.mapper.MusicMapper">
+    <select id="getList" resultType="org.scoula.domain.MusicVO">
+        select * from music
+        order by id desc
+    </select>
+
+    <select id="get" resultType="org.scoula.domain.MusicVO">
+        select * from music where id = #{id}
+    </select>
+
+    <insert id="create" useGeneratedKeys="true" keyProperty="id">
+        insert into music(title, artist, genre, release_date, cover_url)
+        values (#{title}, #{artist}, #{genre}, #{releaseDate}, #{coverUrl})
+    </insert>
+
+    <update id="update">
+        update music set
+                title = #{title},
+                artist = #{artist},
+                genre = #{genre},
+                release_date = #{releaseDate},
+                cover_url = #{coverUrl}
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from music where id = #{id}
+    </delete>
+</mapper>
